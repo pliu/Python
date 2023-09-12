@@ -36,5 +36,5 @@ def recursive_check_exponents(current_product, current_exponents, index):
         i += 1
 
 
-generalized_hamming_count(1000000000, 100)
-print COUNT
+generalized_hamming_count(10**9, 100)
+print(COUNT)

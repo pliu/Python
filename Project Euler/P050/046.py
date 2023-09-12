@@ -8,7 +8,7 @@ prime and y is an integer
 '''
 def findLowestNonGoldbachOdd():
 
-    #Guessed x < 1000000, so would only need primes up to 1000000
+    # Guessed x < 1000000, so would only need primes up to 1000000
     primesArray = findPrimes(1000000)
 
     primesSet = set(primesArray)

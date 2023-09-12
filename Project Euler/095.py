@@ -31,7 +31,7 @@ def followSumDivisors(primesArray, currentChain, visited, i):
         return loop
 
     currentChain.add(i)
-    result = followSumDivisors(primesArray, currentChain, visited, sum(findDivisors(primesArray, i)))
+    result = followSumDivisors(primesArray, currentChain, visited, int(sum(findDivisors(primesArray, i))))
 
     '''
     It is important to set i to visited when unwinding the recursive stack because whether i was
@@ -48,9 +48,9 @@ that number).
 '''
 def findLowestLongestAmicableLoop(n):
     maxLoopLength = 0
-    visited = [False for _i in xrange(n + 1)]
-    primesArray = findPrimes(isqrt(n) + 1)
-    for i in xrange(1, n + 1):
+    visited = [False for _i in range(n + 1)]
+    primesArray = findPrimes(int(isqrt(n)) + 1)
+    for i in range(1, n + 1):
         if not visited[i]:
             currentChain = set()
             loop = followSumDivisors(primesArray, currentChain, visited, i)
@@ -59,4 +59,4 @@ def findLowestLongestAmicableLoop(n):
                 maxLoop = loop
     return min(maxLoop)
 
-print findLowestLongestAmicableLoop(1000000)
+print(findLowestLongestAmicableLoop(10**6))

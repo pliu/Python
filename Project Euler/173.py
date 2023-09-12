@@ -26,4 +26,4 @@ def get_num_hollow_sq_laminae(max_tiles):
     return count
 
 
-print get_num_hollow_sq_laminae(1000000)
+print(get_num_hollow_sq_laminae(10**6))

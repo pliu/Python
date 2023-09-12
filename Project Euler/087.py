@@ -9,7 +9,7 @@ def prime_power_triple_count(n):
     Returns the number of distinct integers below n that can be expressed as the sum of the square of a prime,
     the cube of a prime, and the fourth power of a prime
     """
-    primes = findPrimes(isqrt(n) + 1)
+    primes = findPrimes(int(isqrt(n)) + 1)
     prime_squares = []
     prime_cubes = []
     prime_fourths = []
@@ -42,4 +42,4 @@ def prime_power_triple_count(n):
     return count
 
 
-print prime_power_triple_count(50000000)
+print(prime_power_triple_count(5*10**7))

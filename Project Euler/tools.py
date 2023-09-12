@@ -4,6 +4,7 @@ import re
 from itertools import combinations
 from gmpy2 import isqrt
 from gmpy2 import fac
+from numba import jit
 
 '''
 Gets integer grid data from the file data.txt located on the desktop
@@ -91,22 +92,18 @@ indicating whether that index is a potential prime (1 is yes, 0 is no). Starting
 line is sieved (see sieve of Eratosthenes) to filter out non-primes (value set to 0). The array of
 primes is then constructed by including indices along the number line whose value is still 1.
 '''
+@jit(nopython=True)
 def findPrimes(n):
-    numLine = [1 for _i in xrange(n)]
+    primes = []
+    numLine = [1 for _i in range(n)]
     i = 2
     while i < n:
         if numLine[i] == 1:
+            primes.append(i)
             j = i
             while (i * j < n):
                 numLine[i * j] = 0
                 j += 1
-        i += 1
-
-    i = 2
-    primes = []
-    while i < n:
-        if numLine[i] == 1:
-            primes.append(i)
         i += 1
     return primes
 
@@ -168,14 +165,14 @@ is also considered a proper divisor.
 '''
 def findDivisors(primesArray, n):
     primeFactors = findPrimeFactors(primesArray, n)
-    
+
     #Uses a set to remove duplicate products
     divisorPrimeFactors = set()
-    for i in xrange(1, len(primeFactors)):
+    for i in range(1, len(primeFactors)):
         comboIter = combinations(primeFactors, i)
         for j in comboIter:
             divisorPrimeFactors.add(j)
-            
+
     divisors = [1]
     for i in divisorPrimeFactors:
         currentProduct = 1

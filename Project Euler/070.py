@@ -35,7 +35,7 @@ Minimizing (p_1/(p_1 - 1))(p_2/(p_2 - 1))(p_3/(p_3 - 1))... is equivalent to max
 - show a lower bound on the values needing to be tested (for both primes and the composite)
 '''
 def findLowestPhiPermutation(n):
-    primesArray = findPrimes(isqrt(n) + 1)
+    primesArray = findPrimes(int(isqrt(n)) + 1)
     lower = len(primesArray) - 1
     while True:
         current = len(primesArray) - 1
@@ -54,7 +54,7 @@ def findLowestPhiPermutation(n):
 
 #Finds and returns i < n such that phi(i) is a permutation of i and which minimizes i/phi(i)
 def findLowestPhiPermutationBrute(n):
-    primesArray = findPrimes(isqrt(n) + 1)
+    primesArray = findPrimes(int(isqrt(n)) + 1)
     currentMin = 0
     currentMinValue = n
     i = n
@@ -66,9 +66,9 @@ def findLowestPhiPermutationBrute(n):
             if isPermutation(i, int(phi)):
                 currentMinValue = check
                 currentMin = i
-                print primesSet
+                print(primesSet)
         i -= 1
     return currentMin
 
-print findLowestPhiPermutation(10**7)
-print findLowestPhiPermutationBrute(10**7)
+print(findLowestPhiPermutation(10**7))
+print(findLowestPhiPermutationBrute(10**7))
