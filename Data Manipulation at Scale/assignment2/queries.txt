@@ -1,0 +1,15 @@
+Sparse matrix multiplication
+select rowa, colb, sum(total) from (select a.row_num as rowa, a.col_num as cola, b.row_num as rowb, b.col_num as colb,
+a.value*b.value as total from a, b where a.col_num=b.row_num) group by rowa, colb;
+
+Similarity matrix
+select * from (select adoc, bdoc, sum(total) from (select a.docid as adoc, b.docid as bdoc, a.term as term, a.count*b.count
+as total from frequency as a, frequency as b where a.term=b.term and a.docid < b.docid) group by adoc, bdoc) where
+adoc="10080_txt_crude" and bdoc="17035_txt_earn";
+
+Keyword search
+create view query as select 'q' as docid, 'washington' as term, 1 as count union select 'q' as docid, 'taxes' as term, 1 as
+count union select 'q' as docid, 'treasury' as term, 1 as count union select * from frequency;
+
+select max(x) from (select bdoc, sum(total) as x from (select b.docid as bdoc, a.term as term, a.count*b.count as total from
+query as a, query as b where a.term=b.term and a.docid='q' and a.docid!=b.docid) group by bdoc);
